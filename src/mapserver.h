@@ -618,7 +618,8 @@ enum MS_CONNECTION_TYPE {
   MS_CONTOUR,
   MS_KERNELDENSITY,
   MS_IDW,
-  MS_FLATGEOBUF
+  MS_FLATGEOBUF,
+  MS_RASTER_LABEL
 };
 #define IS_THIRDPARTY_LAYER_CONNECTIONTYPE(type)                               \
   ((type) == MS_UNION || (type) == MS_KERNELDENSITY || (type) == MS_IDW)
@@ -3139,11 +3140,11 @@ MS_DLL_EXPORT imageObj *msDrawReferenceMap(mapObj *map);
 
 #define MS_ARRAY_BIT 32
 
-#define MS_GET_BIT(array, i) (array[i >> 5] & (1 << (i & 0x3f)))
+#define MS_GET_BIT(array, i) ((array)[(i) >> 5] & (1 << ((i)&0x3f)))
 #define MS_SET_BIT(array, i)                                                   \
-  { array[i >> 5] |= (1 << (i & 0x3f)); }
+  { (array)[(i) >> 5] |= (1 << ((i)&0x3f)); }
 #define MS_CLR_BIT(array, i)                                                   \
-  { array[i >> 5] &= (~(1 << (i & 0x3f))); }
+  { (array)[(i) >> 5] &= (~(1 << ((i)&0x3f))); }
 
 MS_DLL_EXPORT size_t msGetBitArraySize(int numbits); /* in mapbits.c */
 MS_DLL_EXPORT ms_bitarray msAllocBitArray(int numbits);
@@ -3271,6 +3272,7 @@ MS_DLL_EXPORT int msUVRASTERLayerInitializeVirtualTable(layerObj *layer);
 MS_DLL_EXPORT int msContourLayerInitializeVirtualTable(layerObj *layer);
 MS_DLL_EXPORT int msPluginLayerInitializeVirtualTable(layerObj *layer);
 MS_DLL_EXPORT int msUnionLayerInitializeVirtualTable(layerObj *layer);
+MS_DLL_EXPORT int msRasterLabelLayerInitializeVirtualTable(layerObj *layer);
 MS_DLL_EXPORT void msPluginFreeVirtualTableFactory(void);
 
 MS_DLL_EXPORT int LayerDefaultGetShapeCount(layerObj *layer, rectObj rect,
@@ -3278,6 +3280,10 @@ MS_DLL_EXPORT int LayerDefaultGetShapeCount(layerObj *layer, rectObj rect,
 void msUVRASTERLayerUseMapExtentAndProjectionForNextWhichShapes(layerObj *layer,
                                                                 mapObj *map);
 rectObj msUVRASTERGetSearchRect(layerObj *layer, mapObj *map);
+
+void msRasterLabelLayerUseMapExtentAndProjectionForNextWhichShapes(
+    layerObj *layer, mapObj *map);
+rectObj msRasterLabelGetSearchRect(layerObj *layer, mapObj *map);
 
 /* ==================================================================== */
 /*      Prototypes for functions in mapdraw.c                           */
