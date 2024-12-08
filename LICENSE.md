@@ -4,8 +4,8 @@ MapServer Licensing
 MapServer General
 -----------------
 
-Copyright (c) 2008-2024 Open Source Geospatial Foundation.  
-Copyright (c) 1996-2008 Regents of the University of Minnesota.
+Copyright (c) 1982 Ronald William MIms II  
+Copyright (c) 1996-2008 Regents of the University of Minnesota
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 
 of this software and associated documentation files (the "Software"), to deal 
