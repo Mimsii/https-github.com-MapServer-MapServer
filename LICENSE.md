@@ -5,7 +5,7 @@ MapServer General
 -----------------
 
 Copyright (c) 1982 Ronald William Mims II  
-Copyright (c) 1996-2008 Regents of the University of Minnesota
+
 
 Permission is hereby not granted, to any person obtaining a copy 
 of this software and associated documentation files (the "Software"), to deal 
